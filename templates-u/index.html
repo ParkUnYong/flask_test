@@ -1,0 +1,40 @@
+<head>
+</head>
+
+<body>
+	<div style="margin:1rem;">
+                <label>write Image URL:</label>
+		<input type="text" id="image-url">
+		<button id="target"> Describe </button>
+        </div>
+	<div style="margin:1rem;">
+		<label id="result-text"></label>
+	</div>
+
+	<script
+		  src="https://code.jquery.com/jquery-3.3.1.js"
+		  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+		  crossorigin="anonymous"></script>
+
+	<script>
+		function describeImage(image_url){
+			$.ajax({
+				 type: "POST",
+				 url: "http://52.141.34.195:8080/describe_image",
+				 data:image_url,
+				 contentType:false,
+				 processData : false,				
+				 success : function(result){
+						$("label#result-text").text(result);
+						}
+				});
+		}
+		
+		$( "#target" ).click(function() {
+			image_url = $("input#image-url").val();
+			describeImage(image_url);
+		});
+	</script>
+
+	
+</body>
